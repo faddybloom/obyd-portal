@@ -6,15 +6,22 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: (id, importer) => {
-        // Only exclude backend packages when imported from src/ directory
-        if (importer && importer.includes('/src/')) {
-          return id.includes('@aws-amplify/backend') || 
-                 id.includes('aws-cdk') || 
-                 id.includes('constructs')
-        }
-        return false
-      }
+      external: [
+        '@aws-amplify/backend',
+        '@aws-amplify/backend-cli', 
+        '@aws-amplify/backend-auth',
+        '@aws-amplify/backend-data',
+        '@aws-amplify/backend-storage',
+        '@aws-amplify/backend-function',
+        'aws-cdk',
+        'aws-cdk-lib',
+        'constructs'
+      ]
+    }
+  },
+  server: {
+    fs: {
+      allow: ['..', '..']
     }
   }
 })
