@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { generateClient } from 'aws-amplify/data';
 import { uploadData, getUrl } from 'aws-amplify/storage';
-import { Schema } from '../../../amplify/data/resource';
+
 
 const client = generateClient();
 

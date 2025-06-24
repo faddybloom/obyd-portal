@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { signIn, signUp } from 'aws-amplify/auth';
 import { generateClient } from 'aws-amplify/data';
 import { useNavigate } from "react-router-dom";
-import { Schema } from '../../../amplify/data/resource';
+
 
 const client = generateClient();
 
