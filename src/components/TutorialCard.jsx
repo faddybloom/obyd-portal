@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import EditTutorials from '../assets/pages/edit';
 import { generateClient } from 'aws-amplify/data';
 import { remove } from 'aws-amplify/storage';
-import { Schema } from '../../amplify/data/resource';
+
 
 const client = generateClient();
 
