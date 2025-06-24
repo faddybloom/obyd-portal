@@ -7,19 +7,12 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    target: 'esnext',
-    rollupOptions: {
-      external: [
-        '@aws-amplify/backend',
-        '@aws-amplify/backend-cli', 
-        '@aws-amplify/backend-auth',
-        '@aws-amplify/backend-data',
-        '@aws-amplify/backend-storage',
-        '@aws-amplify/backend-function',
-        'aws-cdk',
-        'aws-cdk-lib',
-        'constructs'
-      ]
+    target: 'esnext'
+  },
+  resolve: {
+    alias: {
+      // Prevent any accidental imports from amplify directory
+      'amplify': false
     }
   }
 })
