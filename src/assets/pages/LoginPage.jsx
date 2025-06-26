@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { signIn, signUp } from 'aws-amplify/auth';
-import { generateClient } from 'aws-amplify/data';
+import { generateClient } from 'aws-amplify/api';
 import { useNavigate } from "react-router-dom";
 
-
-const client = generateClient({ authMode: 'userPool' });
+const client = generateClient();
 
 function LoginPage ({setIsAuth}) {
   const [email, setEmail] = useState('');
@@ -16,9 +15,21 @@ function LoginPage ({setIsAuth}) {
     try {
       await signIn({ username: email, password });
       
-      const { data: whitelisted } = await client.models.Whitelist.list({
-        filter: { email: { eq: email } }
+      const { data } = await client.graphql({
+        query: `query ListWhitelists($filter: ModelWhitelistFilterInput) {
+          listWhitelists(filter: $filter) {
+            items {
+              id
+              email
+              name
+            }
+          }
+        }`,
+        variables: {
+          filter: { email: { eq: email } }
+        }
       });
+      const whitelisted = data.listWhitelists.items;
       
       if (whitelisted.length === 0) {
         alert("Unknown User");

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EditTutorials from '../assets/pages/edit';
-import { generateClient } from 'aws-amplify/data';
+import { generateClient } from 'aws-amplify/api';
 import { remove } from 'aws-amplify/storage';
 
 
-const client = generateClient({ authMode: 'userPool' });
+const client = generateClient();
 
 const TutorialCard = ({Tutoriallisting}) => {
   let navigate = useNavigate();
@@ -28,7 +28,16 @@ const TutorialCard = ({Tutoriallisting}) => {
     
     try {
       // Delete the tutorial from the database
-      await client.models.Tutorial.delete({ id });
+      await client.graphql({
+        query: `mutation DeleteTutorial($input: DeleteTutorialInput!) {
+          deleteTutorial(input: $input) {
+            id
+          }
+        }`,
+        variables: {
+          input: { id }
+        }
+      });
       
       // Delete the associated image if it exists
       if (Tutoriallisting.imagename) {

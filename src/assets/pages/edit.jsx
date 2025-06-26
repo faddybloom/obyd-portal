@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { generateClient } from 'aws-amplify/data';
+import { generateClient } from 'aws-amplify/api';
 import { uploadData, getUrl } from 'aws-amplify/storage';
 
 
-const client = generateClient({ authMode: 'userPool' });
+const client = generateClient();
 
 const edittutorial = ({Tutoriallisting, setEditTutorial}) => {
   const [title, setTitle] = useState(Tutoriallisting.title);
@@ -19,17 +19,26 @@ const edittutorial = ({Tutoriallisting, setEditTutorial}) => {
 
   const editDoc = async ({id}) => {
     try {
-      await client.models.Tutorial.update({
-        id,
-        title,
-        description,
-        youtubelink,
-        storelink,
-        bloglink,
-        imagelink,
-        storepriority,
-        displayorder,
-        imagename
+      await client.graphql({
+        query: `mutation UpdateTutorial($input: UpdateTutorialInput!) {
+          updateTutorial(input: $input) {
+            id
+          }
+        }`,
+        variables: {
+          input: {
+            id,
+            title,
+            description,
+            youtubelink,
+            storelink,
+            bloglink,
+            imagelink,
+            storepriority,
+            displayorder,
+            imagename
+          }
+        }
       });
       window.location.reload();
     } catch (error) {

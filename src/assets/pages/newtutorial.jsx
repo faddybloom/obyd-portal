@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { generateClient } from 'aws-amplify/data';
+import { generateClient } from 'aws-amplify/api';
 import { uploadData, getUrl } from 'aws-amplify/storage';
 
-const client = generateClient({ authMode: 'userPool' });
+const client = generateClient();
 
 const newtutorial = ({isAuth}) => {
   // Form state
@@ -28,16 +28,25 @@ const newtutorial = ({isAuth}) => {
 
   const createTutorial = async () => {
     try {
-      await client.models.Tutorial.create({
-        title,
-        description,
-        youtubelink,
-        storelink,
-        bloglink,
-        imagelink,
-        storepriority,
-        displayorder,
-        imagename
+      await client.graphql({
+        query: `mutation CreateTutorial($input: CreateTutorialInput!) {
+          createTutorial(input: $input) {
+            id
+          }
+        }`,
+        variables: {
+          input: {
+            title,
+            description,
+            youtubelink,
+            storelink,
+            bloglink,
+            imagelink,
+            storepriority,
+            displayorder,
+            imagename
+          }
+        }
       });
       navigate("/amend");
     } catch (error) {
