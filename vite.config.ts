@@ -13,20 +13,12 @@ export default defineConfig({
       transformMixedEsModules: true
     },
     rollupOptions: {
-      external: [
-        '@aws-amplify/backend',
-        '@aws-amplify/backend-cli',
-        '@aws-amplify/backend-auth',
-        '@aws-amplify/backend-data',
-        '@aws-amplify/backend-storage',
-        '@aws-amplify/backend-function',
-        '@aws-amplify/data-schema-types',
-        '@aws-amplify/data-schema',
-        'aws-cdk',
-        'aws-cdk-lib',
-        'constructs',
-        'aws-cdk-lib/aws-lambda-nodejs',
-      ],
+      external: (id: { includes: (arg0: string) => any }) => {
+        return id.includes('@aws-amplify/backend') ||
+               id.includes('@aws-amplify/data-schema') ||
+               id.includes('aws-cdk') ||
+               id.includes('constructs')
+      },
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
