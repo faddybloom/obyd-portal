@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EditTutorials from '../assets/pages/edit';
-import { generateClient } from 'aws-amplify/api';
+
 import { remove } from 'aws-amplify/storage';
 
 
-const client = generateClient();
+
 
 const TutorialCard = ({Tutoriallisting}) => {
   let navigate = useNavigate();
