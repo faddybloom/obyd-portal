@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { generateClient } from 'aws-amplify/data';
 import { uploadData, getUrl } from 'aws-amplify/storage';
 
-const client = generateClient();
+const client = generateClient({ authMode: 'userPool' });
 
 const newtutorial = ({isAuth}) => {
   // Form state

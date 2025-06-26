@@ -3,7 +3,7 @@ import { generateClient } from 'aws-amplify/data';
 import { uploadData, getUrl } from 'aws-amplify/storage';
 
 
-const client = generateClient();
+const client = generateClient({ authMode: 'userPool' });
 
 const edittutorial = ({Tutoriallisting, setEditTutorial}) => {
   const [title, setTitle] = useState(Tutoriallisting.title);

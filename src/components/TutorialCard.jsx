@@ -5,7 +5,7 @@ import { generateClient } from 'aws-amplify/data';
 import { remove } from 'aws-amplify/storage';
 
 
-const client = generateClient();
+const client = generateClient({ authMode: 'userPool' });
 
 const TutorialCard = ({Tutoriallisting}) => {
   let navigate = useNavigate();

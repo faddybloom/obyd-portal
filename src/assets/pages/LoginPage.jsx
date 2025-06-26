@@ -4,7 +4,7 @@ import { generateClient } from 'aws-amplify/data';
 import { useNavigate } from "react-router-dom";
 
 
-const client = generateClient();
+const client = generateClient({ authMode: 'userPool' });
 
 function LoginPage ({setIsAuth}) {
   const [email, setEmail] = useState('');

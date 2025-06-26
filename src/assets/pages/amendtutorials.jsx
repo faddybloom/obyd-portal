@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { generateClient } from 'aws-amplify/data';
 
-const client = generateClient();
+const client = generateClient({ authMode: 'userPool' });
 
 const amendTutorials = ({isAuth}) => {
     const [tutorials, setTutorials] = useState([]);
