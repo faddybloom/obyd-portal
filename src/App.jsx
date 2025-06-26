@@ -3,12 +3,7 @@ import LoginPage from './assets/pages/LoginPage'
 import AmendTutorials from './assets/pages/amendtutorials';
 import NewTutorial from './assets/pages/newtutorial';
 import { useState, useEffect } from 'react';
-import { signOut, getCurrentUser } from 'aws-amplify/auth';
 import EditTutorial from './assets/pages/edit';
-import { Amplify } from 'aws-amplify';
-
-// Configure Amplify with environment variables or default config
-Amplify.configure({});
 
 
 function App() {
@@ -19,22 +14,13 @@ function App() {
   }, []);
 
   const checkAuthState = async () => {
-    try {
-      await getCurrentUser();
-      setIsAuth(true);
-    } catch {
-      setIsAuth(false);
-    }
+    // Demo mode - no auth check
+    setIsAuth(false);
   };
 
   const signUserOut = async () => {
-    try {
-      await signOut();
-      setIsAuth(false);
-      window.location.pathname = "/";
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
+    setIsAuth(false);
+    window.location.pathname = "/";
   };
 
 

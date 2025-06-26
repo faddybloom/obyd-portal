@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { signIn, signUp } from 'aws-amplify/auth';
+// Auth removed for demo
 import { useNavigate } from "react-router-dom";
 
 const API_ENDPOINT = 'https://idosyc6rlfhzpl6bcctq2s3uia.appsync-api.eu-west-2.amazonaws.com/graphql';
@@ -11,34 +11,14 @@ function LoginPage ({setIsAuth}) {
   let navigate = useNavigate();
 
   const handleSignIn = async () => {
-    try {
-      await signIn({ username: email, password });
-      
-      // Skip whitelist check for now to avoid API issues
-      const whitelisted = [{ email }]; // Assume user is whitelisted
-      
-      if (whitelisted.length === 0) {
-        alert("Unknown User");
-        return;
-      }
-      
-      setIsAuth(true);
-      navigate("/amend");
-    } catch (error) {
-      console.error('Error signing in:', error);
-      alert(error.message);
-    }
+    // Demo mode - skip actual auth
+    setIsAuth(true);
+    navigate("/amend");
   };
 
   const handleSignUp = async () => {
-    try {
-      await signUp({ username: email, password });
-      alert("Please check your email to confirm your account");
-      setIsSignUp(false);
-    } catch (error) {
-      console.error('Error signing up:', error);
-      alert(error.message);
-    }
+    alert("Demo mode - sign up disabled");
+    setIsSignUp(false);
   };
 
   return (
