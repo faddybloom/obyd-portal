@@ -14,9 +14,15 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
-        '@aws-amplify/backend', // ✅ Add this
+        '@aws-amplify/backend',
         '@aws-amplify/backend-cli',
+        '@aws-amplify/backend-auth',
+        '@aws-amplify/backend-data',
+        '@aws-amplify/backend-storage',
+        '@aws-amplify/backend-function',
         '@aws-amplify/data-schema-types',
+        '@aws-amplify/data-schema',
+        'aws-cdk',
         'aws-cdk-lib',
         'constructs',
         'aws-cdk-lib/aws-lambda-nodejs',
@@ -41,9 +47,15 @@ export default defineConfig({
   },
   optimizeDeps: {
     exclude: [
-      '@aws-amplify/backend', // ✅ Add this too
+      '@aws-amplify/backend',
       '@aws-amplify/backend-cli',
+      '@aws-amplify/backend-auth',
+      '@aws-amplify/backend-data',
+      '@aws-amplify/backend-storage',
+      '@aws-amplify/backend-function',
       '@aws-amplify/data-schema-types',
+      '@aws-amplify/data-schema',
+      'aws-cdk',
       'aws-cdk-lib',
       'constructs',
       'aws-cdk-lib/aws-lambda-nodejs',
