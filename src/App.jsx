@@ -5,6 +5,10 @@ import NewTutorial from './assets/pages/newtutorial';
 import { useState, useEffect } from 'react';
 import { signOut, getCurrentUser } from 'aws-amplify/auth';
 import EditTutorial from './assets/pages/edit';
+import { Amplify } from 'aws-amplify';
+
+// Configure Amplify with environment variables or default config
+Amplify.configure({});
 
 
 function App() {
